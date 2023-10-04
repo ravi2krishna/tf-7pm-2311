@@ -18,3 +18,12 @@ resource "aws_subnet" "ecomm-subnet" {
     Name = "ecomm-subnet"
   }
 }
+
+# Gateway
+resource "aws_internet_gateway" "ecomm-gw" {
+  vpc_id = aws_vpc.ecomm-vpc.id
+
+  tags = {
+    Name = "ecomm-gateway"
+  }
+}
