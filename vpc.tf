@@ -27,3 +27,18 @@ resource "aws_internet_gateway" "ecomm-gw" {
     Name = "ecomm-gateway"
   }
 }
+
+# Route Table
+resource "aws_route_table" "ecomm-rt" {
+  vpc_id = aws_vpc.ecomm-vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.ecomm-gw.id
+  }
+
+  tags = {
+    Name = "ecomm-route-table"
+  }
+}
+
