@@ -80,3 +80,37 @@ resource "aws_network_acl_association" "nacl-asc" {
   network_acl_id = aws_network_acl.ecomm-nacl.id
   subnet_id      = aws_subnet.ecomm-subnet.id
 }
+
+# Security Group
+resource "aws_security_group" "ecomm-sg" {
+  name        = "ecomm-sg"
+  description = "Allow ecomm inbound traffic"
+  vpc_id      = aws_vpc.ecomm-vpc.id
+
+  ingress {
+    description      = "SSH"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description      = "HTTP"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "ecomm-security-group"
+  }
+}
