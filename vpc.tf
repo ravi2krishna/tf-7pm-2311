@@ -42,3 +42,9 @@ resource "aws_route_table" "ecomm-rt" {
   }
 }
 
+# Subnet Association - RT
+resource "aws_route_table_association" "ecomm-asc" {
+  subnet_id      = aws_subnet.ecomm-subnet.id
+  route_table_id = aws_route_table.ecomm-rt.id
+}
+
