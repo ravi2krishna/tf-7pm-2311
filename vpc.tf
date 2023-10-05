@@ -48,3 +48,29 @@ resource "aws_route_table_association" "ecomm-asc" {
   route_table_id = aws_route_table.ecomm-rt.id
 }
 
+# Network Access Control List - NACL
+resource "aws_network_acl" "ecomm-nacl" {
+  vpc_id = aws_vpc.ecomm-vpc.id
+
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 65535
+  }
+
+  tags = {
+    Name = "ecomm-nacl"
+  }
+}
