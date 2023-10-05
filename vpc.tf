@@ -74,3 +74,9 @@ resource "aws_network_acl" "ecomm-nacl" {
     Name = "ecomm-nacl"
   }
 }
+
+# NACL - Subnet Association
+resource "aws_network_acl_association" "nacl-asc" {
+  network_acl_id = aws_network_acl.ecomm-nacl.id
+  subnet_id      = aws_subnet.ecomm-subnet.id
+}
