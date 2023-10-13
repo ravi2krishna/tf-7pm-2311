@@ -94,3 +94,10 @@ resource "azurerm_network_security_group" "ecomm-db-nsg" {
     env = "prod"
   }
 }
+
+# Associate Web Subnet - Web NSG
+resource "azurerm_subnet_network_security_group_association" "ecomm-web-asc" {
+  subnet_id                 = azurerm_subnet.ecomm-web-sn.id
+  network_security_group_id = azurerm_network_security_group.ecomm-web-nsg.id
+}
+
