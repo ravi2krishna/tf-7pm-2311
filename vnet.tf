@@ -106,3 +106,15 @@ resource "azurerm_subnet_network_security_group_association" "ecomm-db-asc" {
   subnet_id                 = azurerm_subnet.ecomm-db-sn.id
   network_security_group_id = azurerm_network_security_group.ecomm-db-nsg.id
 }
+
+# Ecomm Web Public IP
+resource "azurerm_public_ip" "ecomm-web-pip" {
+  name                = "ecomm-web-ip"
+  resource_group_name = azurerm_resource_group.ecomm-rg.name
+  location            = azurerm_resource_group.ecomm-rg.location
+  allocation_method   = "Static"
+
+  tags = {
+    env = "prod"
+  }
+}
