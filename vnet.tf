@@ -8,3 +8,12 @@ resource "azurerm_virtual_network" "ecomm-vnet" {
     env = "prod"
   }
 }
+
+# Web Subnet
+resource "azurerm_subnet" "ecomm-web-sn" {
+  name                 = "ecomm-web-subnet"
+  resource_group_name  = azurerm_resource_group.ecomm-rg.name
+  virtual_network_name = azurerm_virtual_network.ecomm-vnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
