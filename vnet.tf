@@ -101,3 +101,8 @@ resource "azurerm_subnet_network_security_group_association" "ecomm-web-asc" {
   network_security_group_id = azurerm_network_security_group.ecomm-web-nsg.id
 }
 
+# Associate Database Subnet - Database NSG
+resource "azurerm_subnet_network_security_group_association" "ecomm-db-asc" {
+  subnet_id                 = azurerm_subnet.ecomm-db-sn.id
+  network_security_group_id = azurerm_network_security_group.ecomm-db-nsg.id
+}
